@@ -1,7 +1,7 @@
 *oclnn* is a Backpropagation neural network (NN) implementation in Java that can run on any OpenCL enabled device.
-I started the NN code base by looking at *backprop1* available at [http://sourceforge.net/projects/backprop1].
+I started the NN code base by looking at *backprop1* available at <http://sourceforge.net/projects/backprop1>.
 
-The *oclnn*  project is hosted at at [https://github.com/forman/oclnn].
+The *oclnn*  project is hosted at at <https://github.com/forman/oclnn>.
 
 To build it you will need Maven 3. Just cd into the main directory and type `mvn package`.
 
