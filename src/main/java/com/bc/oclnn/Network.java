@@ -17,8 +17,12 @@ import static java.lang.System.arraycopy;
  *
  * @author Norman
  */
-public class Network {
+public final class Network {
 
+    public static final double NORM_MIN = 0.01;
+    public static final double NORM_MAX = 0.99;
+
+    private final double slope;
     private final int[] layerSizes;
     private final double[][] values;
     private final double[][] errors;
@@ -35,6 +39,7 @@ public class Network {
      */
     public Network(int... layerSizes) {
 
+        this.slope = 1.0;  // todo
         this.layerSizes = layerSizes;
 
         final int layerCount = layerSizes.length;
@@ -114,15 +119,18 @@ public class Network {
         }
     }
 
-    public static double scaleIn(double in, double inMin, double inMax) {
-        final double outMin = 0.1;
-        final double outMax = 0.9;
-        double outNorm = (in - inMin) / (inMax - inMin);
-        return outMin + outNorm * (outMax - outMin);
+    public static double normalize(double value, double minValue, double maxValue) {
+        double ratio = (value - minValue) / (maxValue - minValue);
+        return NORM_MIN + ratio * (NORM_MAX - NORM_MIN);
     }
 
-    public static double activation(double x) {
-        return 1.0 / (1.0 + exp(-x));
+    public static double denormalize(double normValue, int minValue, int maxValue) {
+        double ratio = (normValue - NORM_MIN) / (NORM_MAX - NORM_MIN);
+        return minValue + ratio * (maxValue - minValue);
+    }
+
+    public double activation(double x) {
+        return 1.0 / (1.0 + exp(-slope *x));
     }
 
 

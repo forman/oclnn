@@ -60,4 +60,16 @@ public class PatternList {
         return xStream;
     }
 
+    public void mix() {
+        final int size = list.size();
+        for (int i = 0; i< size; i++) {
+            int i1 = (int)(size * Math.random());
+            int i2 = (int)(size * Math.random());
+            final Pattern p1 = list.get(i1);
+            final Pattern p2 = list.get(i2);
+            list.set(i1, p2);
+            list.set(i2, p1);
+        }
+
+    }
 }
