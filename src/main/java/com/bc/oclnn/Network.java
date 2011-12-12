@@ -22,8 +22,8 @@ public final class Network {
     public static final double NORM_MIN = 0.01;
     public static final double NORM_MAX = 0.99;
 
-    private final double slope;
     private final int[] layerSizes;
+    private final double slope;
     private final double[][] values;
     private final double[][] errors;
     private final double[][][] weights;
@@ -37,10 +37,23 @@ public final class Network {
      *                   Any number of hidden layers may be in between. At least the number
      *                   of input and output layers must be given.
      */
-    public Network(int... layerSizes) {
+    public Network(int ... layerSizes) {
+          this(layerSizes, 1.0);
+    }
 
-        this.slope = 1.0;  // todo
-        this.layerSizes = layerSizes;
+   /**
+     * Constructor for a standard 3-layer backpropagation network.
+     *
+     * @param slope      Slope of the sigmoid activation function, try 1.0 ... 10.0
+     * @param layerSizes The sizes of each layer, where the input layer is the first and
+     *                   the output layer is the last in the array.
+     *                   Any number of hidden layers may be in between. At least the number
+     *                   of input and output layers must be given.
+     */
+    public Network(int[] layerSizes, double slope) {
+
+        this.layerSizes = layerSizes.clone();
+        this.slope = slope;
 
         final int layerCount = layerSizes.length;
 
@@ -124,7 +137,7 @@ public final class Network {
         return NORM_MIN + ratio * (NORM_MAX - NORM_MIN);
     }
 
-    public static double denormalize(double normValue, int minValue, int maxValue) {
+    public static double denormalize(double normValue, double minValue, double maxValue) {
         double ratio = (normValue - NORM_MIN) / (NORM_MAX - NORM_MIN);
         return minValue + ratio * (maxValue - minValue);
     }

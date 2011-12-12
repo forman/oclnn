@@ -21,10 +21,10 @@ public class XorTest {
         patternList.add(new double[]{ONE, ZERO}, new double[]{ONE});
         patternList.add(new double[]{ONE, ONE}, new double[]{ZERO});
 
-        Network network = new Network(2, 3, 1);
+        Network network = new Network(new int[] {2, 3, 1}, 1.0);
         final Training.BinaryTrainer trainer = new Training.BinaryTrainer();
 
-        Training.trainNetwork(network, patternList, patternList.size(), -1, 0.005, 500, 0.25, 0.5,3, trainer);
+        Training.trainNetwork(network, patternList, patternList.size(), -1, 0.005, 500, 0.25, 0.5, 3, trainer);
 
 
         for (double y = 0.0; y <= 1.0; y += 0.25) {

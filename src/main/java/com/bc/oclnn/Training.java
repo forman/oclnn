@@ -148,11 +148,9 @@ public class Training {
 
     public static class BinaryTrainer implements Trainer {
         public boolean isTrained(double[] actual, double[] expected, double threshold) {
-            final double lowerThreshold = 0.0 + threshold;
-            final double upperThreshold = 1.0 - threshold;
             for (int i = 0; i < expected.length; i++) {
-                final int c1 = classify(expected[i], lowerThreshold, upperThreshold);
-                final int c2 = classify(actual[i], lowerThreshold, upperThreshold);
+                final int c1 = classify(expected[i], threshold);
+                final int c2 = classify(actual[i], threshold);
                 if (c1 != c2) {
                     return false;
                 }
@@ -160,14 +158,8 @@ public class Training {
             return true;
         }
 
-        private static int classify(double x, double lowerThreshold, double upperThreshold) {
-            if (x > upperThreshold) {
-                return 1;
-            } else if (x < lowerThreshold) {
-                return 0;
-            } else {
-                return -1;
-            }
+        private static int classify(double x, double threshold) {
+            return x < threshold ? 0 : x > 1.0 - threshold ? 1 : -1;
         }
     }
 

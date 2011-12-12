@@ -25,6 +25,7 @@ public class XmlTest {
                              "    <int>4</int>\n" +
                              "    <int>2</int>\n" +
                              "  </layerSizes>\n" +
+                             "  <slope>1.0</slope>\n" +
                              "  <values>\n" +
                              "    <double-array>\n" +
                              "      <double>0.0</double>\n" +
