@@ -1,0 +1,13 @@
+__kernel void
+runNetwork(__global const int * layerSizes,
+           __global const float slope,
+           __global const float ** values,
+           __global const float ** errors,
+           __global const float *** weights,
+           __global const float *** deltas)
+{
+    // Vector element index
+    int nIndex = get_global_id(0);
+
+    c[nIndex] = a[nIndex] + b[nIndex];
+}
