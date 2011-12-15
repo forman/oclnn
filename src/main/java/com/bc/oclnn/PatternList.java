@@ -14,9 +14,14 @@ import java.util.ArrayList;
  * @author Norman
  */
 public class PatternList {
-    private ArrayList<Pattern> list = new ArrayList<Pattern>();
+    private ArrayList<Pattern> list;
 
     public PatternList() {
+        list = new ArrayList<Pattern>();
+    }
+
+    public PatternList(ArrayList<Pattern> list) {
+        this.list = list;
     }
 
     public void add(double[] input, double[] output) {
